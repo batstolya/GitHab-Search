@@ -1,0 +1,19 @@
+.search {
+  display: flex;
+  align-items: center;
+  padding-left: 50px;
+  background: lemonchiffon;
+  height: 100px;
+}
+
+.from {
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+  margin-bottom: 30px;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+}
