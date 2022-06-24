@@ -8,12 +8,15 @@ import {
   Card,
   Icon,
   Form,
+  CardGroup,
 } from "semantic-ui-react";
 
 export default function ModalExampleModal(props) {
   const [open, setOpen] = React.useState(true);
   const [count, setCount] = React.useState([]);
   const [reservCaunt, setReservCaunt] = React.useState([]);
+
+  const [openRepos, setOpenRepos] = React.useState([]);
 
   useEffect(() => {
     fetch(props.allRepos)
@@ -23,7 +26,6 @@ export default function ModalExampleModal(props) {
         setReservCaunt(repo);
       });
   }, []);
-
 
   function filter(list, text) {
     text = text.toUpperCase();
@@ -44,18 +46,19 @@ export default function ModalExampleModal(props) {
     console.log(b);
     setCount(b);
   };
-  let location = props.location === null? 'Somewhere on Earth)': props.location;
-  let email = props.email === null? 'not yet)': props.email;
-  let name = props.name === null? props.userName : props.name;
+  let location =
+    props.location === null ? "Somewhere on Earth)" : props.location;
+  let email = props.email === null ? "not yet)" : props.email;
+  let name = props.name === null ? props.userName : props.name;
 
-  // const clickHandler = (e) => {
-  // console.log( e.target.className)
-  // }
+  const clickHandler = (e) => {
+    console.log(e.target.className);
+    let arr = count.filter((item) => e.target.className === item.name);
+    setOpenRepos(arr);
+    console.log(arr);
+  };
   return (
-    <Modal
-      onClose={props.close}
-      open={open}
-    >
+    <Modal onClose={props.close} open={open}>
       <Modal.Header>Profile {props.userName}</Modal.Header>
       <Modal.Content image>
         <Image size="big" src={props.image} wrapped />
@@ -67,10 +70,19 @@ export default function ModalExampleModal(props) {
             repositories with a search bar at the top
           </p>
 
-          <p> <Icon name= "address card outline"/> Name: {name}</p>
-          <p> <Icon name= "mail"/> Email: {email}</p>
-          <p> <Icon name= "map"/> Location: {location}</p>
-          <hr/>
+          <p>
+            {" "}
+            <Icon name="address card outline" /> Name: {name}
+          </p>
+          <p>
+            {" "}
+            <Icon name="mail" /> Email: {email}
+          </p>
+          <p>
+            {" "}
+            <Icon name="map" /> Location: {location}
+          </p>
+          <hr />
           <Card.Content extra>
             <a>
               <Icon name="time" />
@@ -83,7 +95,7 @@ export default function ModalExampleModal(props) {
               {props.updated.split("T")[0]} (Account updated)
             </a>
           </Card.Content>
-          <hr/>
+          <hr />
           <Card.Content extra>
             <a>
               <Icon name="user" />
@@ -99,38 +111,73 @@ export default function ModalExampleModal(props) {
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-        <Card>
-          <Card.Content textAlign="center">
-            <Card.Header>Search for repositories</Card.Header>
-            <Card.Meta>
-              <Input
-                loading
-                icon="user"
-                placeholder="Search..."
-                onChange={changeHandler}
-              />
-            </Card.Meta>
-            <Card.Description textAlign="left">
-              {count.map((rep) => (
-                <p  key={rep.name} className = {rep.name}>{rep.name}</p>
-                
-              ))}
-            </Card.Description>
-            <div className="more-information">
-                
+        <CardGroup>
+          <Card>
+            <Card.Content textAlign="center">
+              <Card.Header>Search for repositories</Card.Header>
+              <Card.Meta>
+                <Input
+                  loading
+                  icon="user"
+                  placeholder="Search..."
+                  onChange={changeHandler}
+                />
+              </Card.Meta>
+              <Card.Description textAlign="left">
+                {count.map((rep) => (
+                  <p key={rep.name} onClick={clickHandler} className={rep.name}>
+                    {rep.name}
+                  </p>
+                ))}
+              </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <a>
+                Pero:
+                <Icon name="sort numeric up" color="red" />
+                {count.length}
+              </a>
+            </Card.Content>
+          </Card>
+          <Card>
+            <Card.Content textAlign="center">
+              <Card.Header>More about the repository</Card.Header>
+
+              <Card.Description textAlign="left">
+                <div className="more-information">
+                  {openRepos.map((item) => (
+                    <div>
+                      <p>
+                        <Icon name="copy" />
+                        Name: {item.name}
+                      </p>
+                      <p>
+                        <Icon name="user" />
+                        Owner: {item.owner.login}
+                      </p>
+                      <p>
+                        <Icon name="edit outline" />
+                        Description: {item.description}
+                      </p>
+                      <p> <Icon name="low vision" />Visibility: {item.visibility}</p>
+                      <p> <Icon name="fork" />Forks: {item.forks}</p>
+                      <p> <Icon name="resize horizontal" />Size: {item.forks}</p>
+                      <p> <Icon name="minus square" />Open Issues: {item.open_issues}</p>
+                      <p> <Icon name="eye" />Watchers: {item.open_watchers}</p>
+                      <p> <Icon name="code branch" />Default_branch: {item.default_branch}</p>
+                      <p> <Icon name="code" />Tehnologic: {item.topics.map(i => <li>{i}</li>)}</p>
+                      <p><Icon name="sitemap" /><a href={`https://github.com//${item.full_name}`}>
+                        Click to: {item.name}
+                      </a>
+                      </p>
+                      <p> <Icon name="calendar alternate outline" />Created at: {item.created_at.split("T")[0]}</p>
+                    </div>
+                  ))}
                 </div>
-             
-          </Card.Content>
-          <Card.Content extra>
-            <a>
-              Pero:
-              <Icon name="sort numeric up" color="red" />
-               {count.length}
-            </a>
-          </Card.Content>
-          
-        </Card>
-        
+              </Card.Description>
+            </Card.Content>
+          </Card>
+        </CardGroup>
         <Button color="black" onClick={props.close}>
           Close
         </Button>
