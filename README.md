@@ -1,5 +1,4 @@
-
-(https://github.com/batstolya/GitHab-Search/blob/main/user.png)
+![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/user.png)
 
 # Getting Started with Create React App
 
