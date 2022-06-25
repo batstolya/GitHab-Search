@@ -17,3 +17,8 @@
   display: flex;
   justify-content: center;
 }
+
+.hover-card p:hover {
+  color: rgb(71, 55, 55);
+}
+

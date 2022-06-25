@@ -9,6 +9,7 @@ import {
   Icon,
   Form,
   CardGroup,
+  Grid
 } from "semantic-ui-react";
 
 export default function ModalExampleModal(props) {
@@ -123,9 +124,14 @@ export default function ModalExampleModal(props) {
                   onChange={changeHandler}
                 />
               </Card.Meta>
-              <Card.Description textAlign="left">
+              <Card.Description textAlign="left" className="hover-card">
                 {count.map((rep) => (
-                  <p key={rep.name} onClick={clickHandler} className={rep.name}>
+                  <p
+                    style={{ cursor: "pointer", "::hover": "red" }}
+                    key={rep.name}
+                    onClick={clickHandler}
+                    className={rep.name}
+                  >
                     {rep.name}
                   </p>
                 ))}
@@ -159,18 +165,55 @@ export default function ModalExampleModal(props) {
                         <Icon name="edit outline" />
                         Description: {item.description}
                       </p>
-                      <p> <Icon name="low vision" />Visibility: {item.visibility}</p>
-                      <p> <Icon name="fork" />Forks: {item.forks}</p>
-                      <p> <Icon name="resize horizontal" />Size: {item.forks}</p>
-                      <p> <Icon name="minus square" />Open Issues: {item.open_issues}</p>
-                      <p> <Icon name="eye" />Watchers: {item.open_watchers}</p>
-                      <p> <Icon name="code branch" />Default_branch: {item.default_branch}</p>
-                      <p> <Icon name="code" />Tehnologic: {item.topics.map(i => <li>{i}</li>)}</p>
-                      <p><Icon name="sitemap" /><a href={`https://github.com//${item.full_name}`}>
-                        Click to: {item.name}
-                      </a>
+                      <p>
+                        {" "}
+                        <Icon name="low vision" />
+                        Visibility: {item.visibility}
                       </p>
-                      <p> <Icon name="calendar alternate outline" />Created at: {item.created_at.split("T")[0]}</p>
+                      <p>
+                        {" "}
+                        <Icon name="fork" />
+                        Forks: {item.forks}
+                      </p>
+                      <p>
+                        {" "}
+                        <Icon name="resize horizontal" />
+                        Size: {item.forks}
+                      </p>
+                      <p>
+                        {" "}
+                        <Icon name="minus square" />
+                        Open Issues: {item.open_issues}
+                      </p>
+                      <p>
+                        {" "}
+                        <Icon name="eye" />
+                        Watchers: {item.open_watchers}
+                      </p>
+                      <p>
+                        {" "}
+                        <Icon name="code branch" />
+                        Default_branch: {item.default_branch}
+                      </p>
+                      <p>
+                        {" "}
+                        <Icon name="code" />
+                        Tehnologic:{" "}
+                        {item.topics.map((i) => (
+                          <li>{i}</li>
+                        ))}
+                      </p>
+                      <p>
+                        <Icon name="sitemap" />
+                        <a href={`https://github.com//${item.full_name}`}>
+                          Click to: {item.name}
+                        </a>
+                      </p>
+                      <p>
+                        {" "}
+                        <Icon name="calendar alternate outline" />
+                        Created at: {item.created_at.split("T")[0]}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -178,17 +221,26 @@ export default function ModalExampleModal(props) {
             </Card.Content>
           </Card>
         </CardGroup>
-        <Button color="black" onClick={props.close}>
-          Close
-        </Button>
-        <Button
-          content="Yep, that's me"
-          labelPosition="right"
-          icon="checkmark"
-          onClick={props.close}
-          positive
-        />
       </Modal.Actions>
+      <Modal.Actions>
+      <Grid>
+    <Grid.Column textAlign="center">
+
+      <Button color="black" onClick={props.close}>
+              Close
+            </Button>
+            <Button
+              content="Yep, that's me"
+              labelPosition="right"
+              icon="checkmark"
+              onClick={props.close}
+              positive
+            />
+          
+    </Grid.Column>
+  </Grid>
+        </Modal.Actions>
+      
     </Modal>
   );
 }
