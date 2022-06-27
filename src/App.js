@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import "./App.css";
-import ModalExampleModal from './ModalExampleModal';
-import { Form, Card, Icon, Image } from "semantic-ui-react";
-
+import ModalExampleModal from "./ModalExampleModal";
+import { Form } from "semantic-ui-react";
+import CardPreview from "./Card/CardPreview";
 
 function App() {
   const [name, setName] = useState("");
@@ -15,17 +15,16 @@ function App() {
   const [error, setError] = useState(null);
   const [allRepos, setAllRepos] = useState("");
   const [created, setCreated] = useState("");
-  const [updated, setUpdated] = useState('')
-  const [location, setLocation] = useState('')
-  const [email, setEmail] = useState('')
+  const [updated, setUpdated] = useState("");
+  const [location, setLocation] = useState("");
+  const [email, setEmail] = useState("");
 
-  const [newComp, setNewComp] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     fetch("https://api.github.com/users/example")
       .then((res) => res.json())
       .then((date) => {
-       
         setDate(date);
       });
   }, []);
@@ -41,9 +40,12 @@ function App() {
     created_at,
     updated_at,
     location,
-    email
+    email,
   }) => {
-    avatar_url = avatar_url === "https://avatars.githubusercontent.com/u/57936?v=4" ?'https://react.semantic-ui.com/images/avatar/large/matthew.png': avatar_url;
+    avatar_url =
+      avatar_url === "https://avatars.githubusercontent.com/u/57936?v=4"
+        ? "https://react.semantic-ui.com/images/avatar/large/matthew.png"
+        : avatar_url;
 
     setName(name);
     setUserName(login);
@@ -59,91 +61,70 @@ function App() {
   };
 
   const handleSearch = (e) => {
-    console.log(e.target.value)
-    setUserInput(e.target.value)
-  } 
+    setUserInput(e.target.value);
+  };
   const handleSubmit = () => {
     fetch(`https://api.github.com/users/${userInput}`)
       .then((res) => res.json())
       .then((date) => {
-        if(date.message) {
-          setError(date.message)
+        if (date.message) {
+          setError(date.message);
         } else {
-          console.log(date)
-          setError(null)
+          setError(null);
           setDate(date);
         }
       }, []);
-    
-  } 
+  };
   const clickHandler = () => {
-    setNewComp(true)
-  }
+    setModalOpen(true);
+  };
 
   const closeClickHandler = () => {
-    setNewComp(false)
-  }
+    setModalOpen(false);
+  };
 
-
-let errorMessage = <h1 style={{textAlign: "center"}}>{error}</h1>
+  let errorMessage = <h1 style={{ textAlign: "center" }}>{error}</h1>;
   return (
-    <div>
+    <Fragment>
       <header className="search">
         <h1>GitHab Search</h1>
       </header>
       <Form className="from" onSubmit={handleSubmit}>
-        <Form.Group >
+        <Form.Group>
           <Form.Input placeholder="Name" name="name" onChange={handleSearch} />
           <Form.Button content="Submit" />
         </Form.Group>
       </Form>
-      {error? errorMessage: (<div className="card">
-        <Card onClick={clickHandler}>
-          <Image
-            src = {avatar}
-            wrapped
-            ui={false}
+      {error ? (
+        errorMessage
+      ) : (
+          <CardPreview
+            clickHandler={clickHandler}
+            src={avatar}
+            name={name}
+            userName={userName}
+            followers = {followers}
+            repos ={repos}
+            following = {following}
           />
-          <Card.Content>
-            <Card.Header>{name}</Card.Header>
-            <Card.Header>{userName}</Card.Header>
-          </Card.Content>
-          <Card.Content extra>
-            <a>
-              <Icon name="user" />
-              {followers} Followers
-            </a>
-          </Card.Content>
-          <Card.Content extra>
-            <a>
-              <Icon name="user" />
-              {repos} Repos
-            </a>
-          </Card.Content>
-          <Card.Content extra>
-            <a>
-              <Icon name="user" />
-              {following} Following
-            </a>
-          </Card.Content>
-        </Card>
-        {newComp? <ModalExampleModal
-          userName = {userName}
-          image = {avatar}
-          allRepos = {allRepos}
-          value = {newComp}
-          close = {closeClickHandler}
-          created = {created}
-          updated = {updated}
-          followers = {followers}
-          following ={following}
-          location = {location}
-          email = {email}
-          name = {name}
-        />: null }
-      </div>)}
-      
-    </div>
+      )}
+         {modalOpen ? (
+            <ModalExampleModal
+              userName={userName}
+              image={avatar}
+              allRepos={allRepos}
+              value={modalOpen}
+              close={closeClickHandler}
+              created={created}
+              updated={updated}
+              followers={followers}
+              following={following}
+              location={location}
+              email={email}
+              name={name}
+            />
+          ) : null}
+    </Fragment>
   );
 }
 

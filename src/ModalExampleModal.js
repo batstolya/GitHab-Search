@@ -4,13 +4,13 @@ import {
   Header,
   Image,
   Modal,
-  Input,
   Card,
   Icon,
-  Form,
   CardGroup,
-  Grid
+  Grid,
 } from "semantic-ui-react";
+import CardMore from "./Card/CardMore";
+import CardSearch from "./Card/CardSearch";
 
 export default function ModalExampleModal(props) {
   const [open, setOpen] = React.useState(true);
@@ -53,10 +53,8 @@ export default function ModalExampleModal(props) {
   let name = props.name === null ? props.userName : props.name;
 
   const clickHandler = (e) => {
-    console.log(e.target.className);
-    let arr = count.filter((item) => e.target.className === item.name);
+    let arr = count.filter((item) => e.target.innerHTML === item.name);
     setOpenRepos(arr);
-    console.log(arr);
   };
   return (
     <Modal onClose={props.close} open={open}>
@@ -112,121 +110,21 @@ export default function ModalExampleModal(props) {
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
+        {/* CardSearch CardMore */}
         <CardGroup>
-          <Card>
-            <Card.Content textAlign="center">
-              <Card.Header>Search for repositories</Card.Header>
-              <Card.Meta>
-                <Input
-                  loading
-                  icon="user"
-                  placeholder="Search..."
-                  onChange={changeHandler}
-                />
-              </Card.Meta>
-              <Card.Description textAlign="left" className="hover-card">
-                {count.map((rep) => (
-                  <p
-                    style={{ cursor: "pointer", "::hover": "red" }}
-                    key={rep.name}
-                    onClick={clickHandler}
-                    className={rep.name}
-                  >
-                    {rep.name}
-                  </p>
-                ))}
-              </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-              <a>
-                Pero:
-                <Icon name="sort numeric up" color="red" />
-                {count.length}
-              </a>
-            </Card.Content>
-          </Card>
-          <Card>
-            <Card.Content textAlign="center">
-              <Card.Header>More about the repository</Card.Header>
-
-              <Card.Description textAlign="left">
-                <div className="more-information">
-                  {openRepos.map((item) => (
-                    <div>
-                      <p>
-                        <Icon name="copy" />
-                        Name: {item.name}
-                      </p>
-                      <p>
-                        <Icon name="user" />
-                        Owner: {item.owner.login}
-                      </p>
-                      <p>
-                        <Icon name="edit outline" />
-                        Description: {item.description}
-                      </p>
-                      <p>
-                        {" "}
-                        <Icon name="low vision" />
-                        Visibility: {item.visibility}
-                      </p>
-                      <p>
-                        {" "}
-                        <Icon name="fork" />
-                        Forks: {item.forks}
-                      </p>
-                      <p>
-                        {" "}
-                        <Icon name="resize horizontal" />
-                        Size: {item.forks}
-                      </p>
-                      <p>
-                        {" "}
-                        <Icon name="minus square" />
-                        Open Issues: {item.open_issues}
-                      </p>
-                      <p>
-                        {" "}
-                        <Icon name="eye" />
-                        Watchers: {item.open_watchers}
-                      </p>
-                      <p>
-                        {" "}
-                        <Icon name="code branch" />
-                        Default_branch: {item.default_branch}
-                      </p>
-                      <p>
-                        {" "}
-                        <Icon name="code" />
-                        Tehnologic:{" "}
-                        {item.topics.map((i) => (
-                          <li>{i}</li>
-                        ))}
-                      </p>
-                      <p>
-                        <Icon name="sitemap" />
-                        <a href={`https://github.com//${item.full_name}`}>
-                          Click to: {item.name}
-                        </a>
-                      </p>
-                      <p>
-                        {" "}
-                        <Icon name="calendar alternate outline" />
-                        Created at: {item.created_at.split("T")[0]}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </Card.Description>
-            </Card.Content>
-          </Card>
+          <CardSearch
+            count={count}
+            changeHandler={changeHandler}
+            clickHandler={clickHandler}
+          />
+          <CardMore openRepos={openRepos} />
         </CardGroup>
+        {/* CardSearch CardMore */}
       </Modal.Actions>
       <Modal.Actions>
-      <Grid>
-    <Grid.Column textAlign="center">
-
-      <Button color="black" onClick={props.close}>
+        <Grid>
+          <Grid.Column textAlign="center">
+            <Button color="black" onClick={props.close}>
               Close
             </Button>
             <Button
@@ -236,11 +134,9 @@ export default function ModalExampleModal(props) {
               onClick={props.close}
               positive
             />
-          
-    </Grid.Column>
-  </Grid>
-        </Modal.Actions>
-      
+          </Grid.Column>
+        </Grid>
+      </Modal.Actions>
     </Modal>
   );
 }
