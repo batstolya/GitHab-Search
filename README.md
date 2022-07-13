@@ -1,4 +1,7 @@
-![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/user.png)
+![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show1.png)
+![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show2.png)
+![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show3.png)
+![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show4.png)
 
 
 
