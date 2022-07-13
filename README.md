@@ -1,7 +1,7 @@
-![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show1.png)
-![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show2.png)
-![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show3.png)
-![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show4.png)
+![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show11.png)
+![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show22.png)
+![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show33.png)
+![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show44.png)
 
 
 ##
