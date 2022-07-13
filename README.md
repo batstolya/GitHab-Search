@@ -1,4 +1,10 @@
 ![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/user.png)
+
+
+
+
+## Old version
+![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/user.png)
 ![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/user2.png)
 
 # Getting Started with Create React App
