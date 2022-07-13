@@ -18,9 +18,11 @@ export default function ModalExampleModal(props) {
   const [reservCaunt, setReservCaunt] = React.useState([]);
 
   const [openRepos, setOpenRepos] = React.useState([]);
+console.log(props.singeRepo,'singeRepo')
+console.log(props.allRepos,'allRepos')
 
   useEffect(() => {
-    fetch(props.allRepos)
+    fetch(props.allRepos || props.singeRepo)
       .then((res) => res.json())
       .then((repo) => {
         setCount(repo);
@@ -44,7 +46,6 @@ export default function ModalExampleModal(props) {
 
   const changeHandler = (e) => {
     let b = filter(count, e.target.value);
-    console.log(b);
     setCount(b);
   };
   let location =
@@ -97,7 +98,7 @@ export default function ModalExampleModal(props) {
           <hr />
           <Card.Content extra>
             <a>
-              <Icon name="user" />
+              <Icon name="github" />
               {props.followers} (Followers)
             </a>
           </Card.Content>
