@@ -7,7 +7,7 @@ import {
 export default function CardSearch(props) {
 
   return (
-    <Card>
+    <Card >
       <Card.Content textAlign="center">
         <Card.Header>Search for repositories</Card.Header>
         <Card.Meta>
@@ -19,7 +19,7 @@ export default function CardSearch(props) {
           />
         </Card.Meta>
         <Card.Description textAlign="left" className={'hover-card'} >
-          {props.count.map((rep, i) => (
+          <div style={{overflow: 'auto', maxHeight: 300 }}>{props.count.map((rep, i) => (
             <p
               style={{ cursor: "pointer"}}
               key={Math.random(10)}
@@ -29,6 +29,7 @@ export default function CardSearch(props) {
              {rep.name}
             </p>
           ))}
+          </div>
         </Card.Description>
       </Card.Content>
       <Card.Content extra>

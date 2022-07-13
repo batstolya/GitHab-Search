@@ -73,7 +73,7 @@ const ListUsers = (props) => {
   ));
   return (
     <div>
-      <List selection size="big">
+      <List selection  size="big" >
         {mapOfArr}
       </List>
     </div>

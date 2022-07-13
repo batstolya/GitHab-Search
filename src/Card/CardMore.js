@@ -76,5 +76,6 @@ export default function CardMore(props) {
         </Card.Description>
       </Card.Content>
     </Card>
+
   );
 }

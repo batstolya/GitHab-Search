@@ -51,12 +51,13 @@ export default function ListItem(props) {
 
   return (
     <>
-      <List.Item
+      <List.Item 
         color="red"
         style={{
           margin: "10px",
           borderRadius: "0.28571429rem",
           boxShadow: "0px 1px 1px 0px #d4d4d5, 0px 0px 0px 1px #d4d4d5",
+
         }}
       >
         <Image avatar src={props.src} />
