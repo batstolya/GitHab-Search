@@ -2,9 +2,9 @@ import React from "react";
 import { Card, Icon } from "semantic-ui-react";
 export default function CardMore(props) {
   return (
-    <Card>
+    <Card >
       <Card.Content textAlign="center">
-        <Card.Header>More about the repository</Card.Header>
+        <Card.Header >More about the repository</Card.Header>
         <Card.Description textAlign="left">
           <div className="more-information">
             {props.openRepos.map((item) => (
@@ -60,7 +60,7 @@ export default function CardMore(props) {
                   ))}
                 </p>
                 <p>
-                  <Icon name="sitemap" />
+                  <Icon name="github" />
                   <a href={`https://github.com//${item.full_name}`}>
                     Click to: {item.name}
                   </a>

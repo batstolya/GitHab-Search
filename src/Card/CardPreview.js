@@ -12,7 +12,7 @@ export default function CardPreview(props) {
         </Card.Content>
         <Card.Content extra>
           <a>
-            <Icon name="user" />
+            <Icon name="github" />
             {props.followers} Followers
           </a>
         </Card.Content>

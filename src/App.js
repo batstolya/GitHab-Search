@@ -1,8 +1,14 @@
 import React, { useState, useEffect, Fragment } from "react";
 import "./App.css";
 import ModalExampleModal from "./ModalExampleModal";
-import { Form } from "semantic-ui-react";
-import CardPreview from "./Card/CardPreview";
+import {
+  Form,
+  Loader,
+  Dimmer,
+} from "semantic-ui-react";
+
+import ListUsers from "./List/ListUsers";
+import ListLike from "./List/ListLike";
 
 function App() {
   const [name, setName] = useState("");
@@ -18,8 +24,11 @@ function App() {
   const [updated, setUpdated] = useState("");
   const [location, setLocation] = useState("");
   const [email, setEmail] = useState("");
-
+  const [dateArr, setDateArr] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [reservArr, setReservArr] = useState([]);
+
 
   useEffect(() => {
     fetch("https://api.github.com/users/example")
@@ -28,7 +37,6 @@ function App() {
         setDate(date);
       });
   }, []);
-
   const setDate = ({
     name,
     login,
@@ -62,16 +70,27 @@ function App() {
 
   const handleSearch = (e) => {
     setUserInput(e.target.value);
+    setError(null);
   };
+
   const handleSubmit = () => {
+    setIsLoading(true);
     fetch(`https://api.github.com/users/${userInput}`)
       .then((res) => res.json())
       .then((date) => {
         if (date.message) {
           setError(date.message);
+          setIsLoading(false);
+          // console.log(date.message,'date.messagedate.messagedate.messagedate.messagedate.messagedate.message')
         } else {
+          // console.log(date, 'asdasdsadasdasdsadsadas')
           setError(null);
           setDate(date);
+          setDateArr([date]);
+          setIsLoading(false);
+          let arr = [...reservArr, date];
+
+          setReservArr(arr);
         }
       }, []);
   };
@@ -83,47 +102,55 @@ function App() {
     setModalOpen(false);
   };
 
-  let errorMessage = <h1 style={{ textAlign: "center" }}>{error}</h1>;
   return (
     <Fragment>
       <header className="search">
         <h1>GitHab Search</h1>
-      </header>
-      <Form className="from" onSubmit={handleSubmit}>
-        <Form.Group>
-          <Form.Input placeholder="Name" name="name" onChange={handleSearch} />
-          <Form.Button content="Submit" />
-        </Form.Group>
-      </Form>
-      {error ? (
-        errorMessage
-      ) : (
-          <CardPreview
-            clickHandler={clickHandler}
-            src={avatar}
-            name={name}
-            userName={userName}
-            followers = {followers}
-            repos ={repos}
-            following = {following}
-          />
-      )}
-         {modalOpen ? (
-            <ModalExampleModal
-              userName={userName}
-              image={avatar}
-              allRepos={allRepos}
-              value={modalOpen}
-              close={closeClickHandler}
-              created={created}
-              updated={updated}
-              followers={followers}
-              following={following}
-              location={location}
-              email={email}
-              name={name}
+        <Form className="from" onSubmit={handleSubmit} size="middle">
+          <Form.Group>
+            <Form.Input
+              error={userInput === ""}
+              placeholder="Name"
+              name="name"
+              onChange={handleSearch}
             />
-          ) : null}
+            <Form.Button content="Submit" size="middle" />
+          </Form.Group>
+        </Form>
+      </header>
+      {/* list like */}
+      <ListLike onArr={reservArr} />
+      {isLoading && userInput != "" && dateArr.length > 0 && (
+        <Dimmer active>
+          <Loader indeterminate>Preparing Files</Loader>
+        </Dimmer>
+      )}
+      {/* list like */}
+      {error && <p className="is-loading">{error}</p>}
+      <div className="flex">
+        {/* <HeaderImage /> */}
+        <ListUsers
+          // onName={onNameFromList}
+          arr={dateArr}
+          userInput={userInput}
+        />
+      </div>
+      {modalOpen ? (
+        <ModalExampleModal
+          userName={userName}
+          image={avatar}
+          allRepos={allRepos}
+          value={modalOpen}
+          close={closeClickHandler}
+          created={created}
+          updated={updated}
+          followers={followers}
+          following={following}
+          location={location}
+          email={email}
+          name={name}
+        />
+      ) : null}
     </Fragment>
   );
 }

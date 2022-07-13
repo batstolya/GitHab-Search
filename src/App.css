@@ -1,9 +1,14 @@
 .search {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding-left: 50px;
   background: lemonchiffon;
   height: 100px;
+}
+
+.search h1 {
+  display: contents;
 }
 
 .from {
@@ -22,3 +27,29 @@
   color:  #4183C4;
 }
 
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.flex-like {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.is-loading {
+  position: absolute;
+    right: 50%;
+    top: 14%;
+    z-index: 1;
+}
+
+.absolute {
+  position: absolute;
+    top: 15%;
+    left: 2%;
+
+}
