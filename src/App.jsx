@@ -81,9 +81,7 @@ function App() {
         if (date.message) {
           setError(date.message);
           setIsLoading(false);
-          // console.log(date.message,'date.messagedate.messagedate.messagedate.messagedate.messagedate.message')
         } else {
-          // console.log(date, 'asdasdsadasdasdsadsadas')
           setError(null);
           setDate(date);
           setDateArr([date]);
@@ -125,12 +123,9 @@ function App() {
           <Loader indeterminate>Preparing Files</Loader>
         </Dimmer>
       )}
-      {/* list like */}
       {error && <p className="is-loading">{error}</p>}
       <div className="flex">
-        {/* <HeaderImage /> */}
         <ListUsers
-          // onName={onNameFromList}
           arr={dateArr}
           userInput={userInput}
         />
