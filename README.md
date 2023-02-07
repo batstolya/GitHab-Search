@@ -1,7 +1,7 @@
 # GitHab Search 
 
 - [DEMO LINK](https://batstolya.github.io/GitHab-Search/)
-##
+#
 ![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show11.png)
 ![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show33.png)
 ![Иллюстрация к проекту](https://github.com/batstolya/GitHab-Search/blob/main/show44.png)
